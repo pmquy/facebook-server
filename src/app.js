@@ -17,12 +17,7 @@ const mongoDb = require('./v1/databases/init.mongodb')
 mongoDb.connect();
 
 // handle cors
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");  
-    res.header("Access-Control-Allow-Methods", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+app.use(require('cors')())
 
 // connect socket.io
 const socket = require('./v1/config/socket');
@@ -38,6 +33,7 @@ app.use((req, res, next) => {
     error.status = 404
     next(error)
 })
+
 // handle when error
 app.use((error, req, res, next) => {
     res.status(error.status || 500).send({
