@@ -8,5 +8,5 @@ router.get('/:id',controller.getImageById);
 router.delete('/:id', controller.deleteImageById);
 router.patch('/:id',upload.single('image'), controller.updateImageById)
 router.get('/',controller.getImages);
-router.delete('/', controller.deleteImages)
-module.exports = router
+router.delete('/', controller.deleteImages);
+module.exports = router;

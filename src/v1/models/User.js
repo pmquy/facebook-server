@@ -6,7 +6,6 @@ const User = new Schema({
     password : String,
     createAt : Date,
     avt : String,
-    likedPosts : Array,
 }) 
 
 module.exports = mongoose.model('Users', User)

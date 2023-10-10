@@ -8,24 +8,12 @@ const connect = () => {
     });
     
     io.on('connection', (socket) => {
-        socket.on('someone chat', () => {
-            io.emit('someone chat');
-        });
         socket.on('someone login', id => {
             socket.broadcast.emit('someone login', id)
-        })
-        socket.on('change home', id => {
-            io.emit('change home', id);
-        })
-        socket.on('change post', id => {
-            io.emit('change post', id);
-        })
-        socket.on('delete post', postId => {
-            io.emit('delete post', postId);
-        })
-        socket.on('add post', post => {
-            io.emit('add post', post);
-        })
+        }) 
+        socket.on('dataUpdate', data => {
+            socket.broadcast.emit('dataUpdate', data);
+        }) 
     })
 
 

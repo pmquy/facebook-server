@@ -3,7 +3,11 @@ const fs = require('fs')
 const path = require('path')
 
 class Controller {
-    createImage = async (req, res) => {               
+    createImage = async (req, res) => {  
+        if(!req.file) {
+            res.send({});
+            return;            
+        }
         const obj = {       
             ...req.body,     
             img: {
@@ -39,13 +43,16 @@ class Controller {
     updateImageById = async (req, res) => {
         const queries = {   
             ...req.query,         
-            img: {
+            
+        }   
+        if(req.file) {
+            queries.img = {
                 data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
                 contentType: 'image/png'
             }
-        }        
+            fs.unlinkSync(path.join(__dirname + '/uploads/' + req.file.filename))
+        }   
         const image = await db.updateImageById(req.params.id, queries);
-        fs.unlinkSync(path.join(__dirname + '/uploads/' + req.file.filename))
         res.send(image);
     }
 }
