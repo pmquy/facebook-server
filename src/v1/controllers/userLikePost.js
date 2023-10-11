@@ -9,7 +9,7 @@ class Controller {
         const t = await db.deleteUserLikePost(req.query);
         res.send(t)
     }
-    findUserLikePost = async (req, res) => {
+    findUserLikePost = async (req, res) => {        
         const t = await db.findUserLikePost(req.query);
         res.send(t);
     }

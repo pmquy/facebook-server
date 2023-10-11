@@ -2,15 +2,15 @@ const UserLikePost = require('../models/UserLikePost')
 const post = require('./post')
 
 const findUserLikePost = async query => {
-    const res = {};
-    await UserLikePost.findOne(query)
+    let res = {};
+    await UserLikePost.find(query)
         .then(val => res = val)
         .catch(err => {});
     return res;
 }
 
 const addUserLikePost = async query => {
-    const res = {};
+    let res = {};
     await UserLikePost.create({createAt : Date.now(), ...query})
         .then(val => res = val)
         .catch(err => {});
@@ -21,7 +21,7 @@ const addUserLikePost = async query => {
 }
 
 const deleteUserLikePost = async query => {
-    const res = {};
+    let res = {};
     await UserLikePost.findOneAndDelete(query)
         .then(val => res = val)
         .catch(err => {});
